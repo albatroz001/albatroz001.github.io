@@ -265,6 +265,69 @@
         .command-name{width:160px;color:#a855f7}
         .command-desc{color:#aab1c3}
 
+
+        /* Cute anime cat assistant */
+        .anime-cat {
+            position: fixed;
+            right: 24px;
+            bottom: 18px;
+            width: 150px;
+            height: 150px;
+            z-index: 9998;
+            pointer-events: none;
+            filter: drop-shadow(0 0 16px rgba(0, 255, 136, 0.25));
+        }
+        .anime-cat svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+            transform: scaleX(0.82);
+            transform-origin: bottom center;
+        }
+        .cat-tail { transform-origin: 105px 108px; animation: tailSway 3s ease-in-out infinite; }
+        .cat-ear-left { transform-origin: 58px 42px; animation: earTwitchLeft 5.5s ease-in-out infinite; }
+        .cat-ear-right { transform-origin: 94px 42px; animation: earTwitchRight 6.2s ease-in-out infinite; }
+        .cat-eye { transform-origin: center; transition: none; }
+        .cat-eye-lid { transform-origin: center; transform: scaleY(0); opacity: 0; }
+        .cat-pupil { transition: none; }
+        .cat-paw { transform-origin: 62px 95px; }
+        .anime-cat.cleaning .cat-paw { animation: cleanPaw 0.75s ease-in-out infinite; }
+        .anime-cat.cleaning .cat-head { animation: headDip 0.75s ease-in-out infinite; }
+        .anime-cat.cleaning .cat-eye { transform: scaleY(0.55); }
+        .anime-cat.blinking .cat-eye-lid { animation: blinkEyes 0.18s ease-in-out; }
+        .anime-cat.blinking .cat-eye { animation: blinkSquish 0.18s ease-in-out; }
+        @keyframes cleanPaw {
+            0%, 100% { transform: rotate(0deg) translateY(0); }
+            50% { transform: rotate(-28deg) translateY(-10px); }
+        }
+        @keyframes headDip {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(4px) rotate(-2deg); }
+        }
+        @keyframes blinkEyes {
+            0%, 100% { transform: scaleY(0); opacity: 0; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+        @keyframes blinkSquish {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.08); }
+        }
+        @keyframes tailSway {
+            0%, 100% { transform: rotate(-4deg); }
+            50% { transform: rotate(7deg); }
+        }
+        @keyframes earTwitchLeft {
+            0%, 92%, 100% { transform: rotate(0deg); }
+            95% { transform: rotate(-7deg); }
+        }
+        @keyframes earTwitchRight {
+            0%, 90%, 100% { transform: rotate(0deg); }
+            94% { transform: rotate(7deg); }
+        }
+        @media (max-width: 600px) {
+            .anime-cat { width: 105px; height: 105px; right: 12px; bottom: 12px; }
+        }
+
         @media (max-width: 600px) {
             .hero-section h1 { font-size: 2rem; }
             .hero-subtitle { font-size: 0.8rem; }
@@ -281,6 +344,49 @@
     <div class="scan-lines"></div>
     <canvas id="particleCanvas"></canvas>
     <canvas id="matrixCanvas"></canvas>
+
+    <div class="anime-cat cleaning" id="animeCat" aria-hidden="true">
+        <svg viewBox="0 0 150 150">
+            <path class="cat-tail" d="M104 105 C136 91, 135 52, 111 58 C95 62, 104 83, 119 76" fill="none" stroke="#25283a" stroke-width="15" stroke-linecap="round"/>
+            <path class="cat-tail" d="M104 105 C136 91, 135 52, 111 58 C95 62, 104 83, 119 76" fill="none" stroke="#00ff88" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+            <ellipse cx="78" cy="105" rx="42" ry="32" fill="#232638"/>
+            <ellipse cx="78" cy="110" rx="30" ry="21" fill="#171a2b" opacity="0.6"/>
+            <ellipse cx="98" cy="127" rx="17" ry="8" fill="#202336"/>
+            <ellipse cx="58" cy="127" rx="17" ry="8" fill="#202336"/>
+            <g class="cat-head">
+                <path class="cat-ear-left" d="M49 55 L57 24 L72 52 Z" fill="#232638"/>
+                <path class="cat-ear-left" d="M56 49 L60 34 L68 51 Z" fill="#4b2440" opacity="0.9"/>
+                <path class="cat-ear-right" d="M83 52 L102 24 L104 60 Z" fill="#232638"/>
+                <path class="cat-ear-right" d="M89 51 L99 35 L100 54 Z" fill="#4b2440" opacity="0.9"/>
+                <circle cx="76" cy="69" r="35" fill="#26293d"/>
+                <path d="M45 67 C39 70, 36 75, 36 80" stroke="#444a66" stroke-width="2" fill="none"/>
+                <path d="M107 67 C113 70, 116 75, 116 80" stroke="#444a66" stroke-width="2" fill="none"/>
+                <path d="M64 40 C68 52, 72 55, 76 56 C81 54, 85 50, 89 39" fill="none" stroke="#00d4ff" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+                <g class="cat-eye cat-eye-left">
+                    <ellipse cx="62" cy="68" rx="8" ry="10" fill="#141421"/>
+                    <circle class="cat-pupil cat-pupil-left" cx="62" cy="68" r="3.3" fill="#00ff88"/>
+                    <circle cx="59" cy="64" r="2" fill="#ffffff"/>
+                </g>
+                <g class="cat-eye cat-eye-right">
+                    <ellipse cx="90" cy="68" rx="8" ry="10" fill="#141421"/>
+                    <circle class="cat-pupil cat-pupil-right" cx="90" cy="68" r="3.3" fill="#00ff88"/>
+                    <circle cx="87" cy="64" r="2" fill="#ffffff"/>
+                </g>
+                <ellipse class="cat-eye-lid" cx="62" cy="68" rx="9" ry="10" fill="#26293d"/>
+                <ellipse class="cat-eye-lid" cx="90" cy="68" rx="9" ry="10" fill="#26293d"/>
+                <path d="M75 78 L80 78 L77.5 82 Z" fill="#00d4ff"/>
+                <path d="M77.5 82 C74 86, 70 86, 68 83" stroke="#b9c0d8" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M77.5 82 C81 86, 85 86, 87 83" stroke="#b9c0d8" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M50 78 L30 73" stroke="#6c728f" stroke-width="2" stroke-linecap="round"/>
+                <path d="M50 84 L29 84" stroke="#6c728f" stroke-width="2" stroke-linecap="round"/>
+                <path d="M102 78 L122 73" stroke="#6c728f" stroke-width="2" stroke-linecap="round"/>
+                <path d="M102 84 L123 84" stroke="#6c728f" stroke-width="2" stroke-linecap="round"/>
+            </g>
+            <ellipse class="cat-paw" cx="62" cy="104" rx="12" ry="18" fill="#26293d"/>
+            <path class="cat-paw" d="M56 94 C58 100, 66 100, 68 94" stroke="#6c728f" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        </svg>
+    </div>
+
 
     <div class="boot-screen" id="bootScreen"></div>
 
@@ -678,6 +784,80 @@
             requestAnimationFrame(animateParticles);
         }
         animateParticles();
+
+
+        /* Cute anime cat behaviour */
+        const animeCat = document.getElementById('animeCat');
+        const leftPupil = document.querySelector('.cat-pupil-left');
+        const rightPupil = document.querySelector('.cat-pupil-right');
+        let catIdleTimer;
+        let lastMouse = { x: window.innerWidth - 80, y: window.innerHeight - 80 };
+
+        function setCatCleaning(state) {
+            if (!animeCat) return;
+            if (state) animeCat.classList.add('cleaning');
+            else animeCat.classList.remove('cleaning');
+        }
+
+        function getSvgPoint(svg, svgX, svgY) {
+            const pt = svg.createSVGPoint();
+            pt.x = svgX;
+            pt.y = svgY;
+            return pt.matrixTransform(svg.getScreenCTM());
+        }
+
+        function moveCatEyes(x, y) {
+            if (!animeCat || !leftPupil || !rightPupil) return;
+
+            const svg = animeCat.querySelector('svg');
+            const leftEye = getSvgPoint(svg, 62, 68);
+            const rightEye = getSvgPoint(svg, 90, 68);
+
+            function pupilOffset(eye) {
+                const dx = x - eye.x;
+                const dy = y - eye.y;
+                const dist = Math.hypot(dx, dy) || 1;
+                const maxMove = 4.6;
+                return {
+                    x: (dx / dist) * maxMove,
+                    y: (dy / dist) * maxMove
+                };
+            }
+
+            const left = pupilOffset(leftEye);
+            const right = pupilOffset(rightEye);
+
+            leftPupil.setAttribute('transform', 'translate(' + left.x.toFixed(2) + ', ' + left.y.toFixed(2) + ')');
+            rightPupil.setAttribute('transform', 'translate(' + right.x.toFixed(2) + ', ' + right.y.toFixed(2) + ')');
+        }
+
+        let eyeFrame = null;
+
+        document.addEventListener('mousemove', function(e) {
+            lastMouse = { x: e.clientX, y: e.clientY };
+            setCatCleaning(false);
+
+            if (eyeFrame) cancelAnimationFrame(eyeFrame);
+            eyeFrame = requestAnimationFrame(function() {
+                moveCatEyes(lastMouse.x, lastMouse.y);
+            });
+
+            clearTimeout(catIdleTimer);
+            catIdleTimer = setTimeout(function() {
+                setCatCleaning(true);
+            }, 3000);
+        });
+
+        function randomCatBlink() {
+            if (!animeCat) return;
+            animeCat.classList.add('blinking');
+            setTimeout(function() { animeCat.classList.remove('blinking'); }, 200);
+            setTimeout(randomCatBlink, 2200 + Math.random() * 4200);
+        }
+
+        moveCatEyes(lastMouse.x, lastMouse.y);
+        setTimeout(randomCatBlink, 1800);
+
 
         setTimeout(() => { initTerminal(); }, 2800);
     </script>
